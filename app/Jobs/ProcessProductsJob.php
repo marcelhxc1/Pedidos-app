@@ -34,7 +34,6 @@ class ProcessProductsJob implements ShouldQueue
     public function handle()
     {
         foreach ($this->products as $productData) {
-            Log::error($productData);
             Product::create([
                 'name' => $productData['product_name'],
                 'unit_price' => $productData['unit_value'],

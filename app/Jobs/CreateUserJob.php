@@ -47,8 +47,6 @@ class CreateUserJob implements ShouldQueue
      */
     public function handle()
     {
-        Log::error($this->password);
-        Log::error($this->password_confirmation);
         if ($this->password != $this->password_confirmation) {
             throw new \Exception('As senhas não estão iguais, por favor corrija e tente novamente.');
         }
