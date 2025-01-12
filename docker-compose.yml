@@ -1,0 +1,86 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: laravel_app
+    working_dir: /var/www
+    volumes:
+      - .:/var/www
+    networks:
+      - app-network
+    depends_on:
+      - mysql
+      - redis
+    environment:
+      - DB_CONNECTION=mysql
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_DATABASE=laravel
+      - DB_USERNAME=root
+      - DB_PASSWORD=root
+      - NEW_RELIC_LICENSE_KEY=4b4e5b5343cf6afd4718762af026f1b0FFFFNRAL
+      - NEW_RELIC_NO_DMI=true
+    # Remover a diretiva `expose` (não necessária)
+  
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: laravel
+    networks:
+      - app-network
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+  redis:
+    image: redis:alpine
+    container_name: redis
+    networks:
+      - app-network
+    ports:
+      - "6379:6379"
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - .:/var/www
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    networks:
+      - app-network
+    depends_on:
+      - app
+
+  newrelic-infra:
+    image: newrelic/infrastructure:latest
+    container_name: newrelic_infra
+    environment:
+      - NRIA_LICENSE_KEY=4b4e5b5343cf6afd4718762af026f1b0FFFFNRAL
+      - NRIA_DISPLAY_NAME=LaravelAppInfrastructure
+      - NEW_RELIC_NO_DMI=true
+    networks:
+      - app-network
+    volumes:
+      - /proc:/host/proc:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /sys:/sys:ro
+      - /sys:/host/sys
+      - ./newrelic-infra.yml:/etc/newrelic-infra.yml
+    cap_add:
+      - NET_ADMIN
+    restart: always
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mysql_data:
+    driver: local

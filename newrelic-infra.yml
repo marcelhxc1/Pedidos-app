@@ -1,0 +1,6 @@
+license_key: '4b4e5b5343cf6afd4718762af026f1b0FFFFNRAL'
+app_name: 'LaravelAppInfrastructure'
+verbose: 0
+logging:
+  enabled: true
+  logfile: /var/log/newrelic-infra/newrelic-infra.log
