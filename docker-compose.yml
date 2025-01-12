@@ -3,7 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: laravel_app
+    #container_name: laravel_app
     working_dir: /var/www
     volumes:
       - .:/var/www
