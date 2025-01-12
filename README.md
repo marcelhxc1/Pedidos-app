@@ -1,4 +1,15 @@
 # Pedidos-app Setup
+Tecnologias utilizadas :
+
+PHP 8.1
+Laravel - latest
+NewRelic
+Docker
+Redis
+Mysql 8
+ShellScript
+PHPUnit
+Nginx ( com containeres escalaveis tendo o load balancer executado pelo webserver )
 
 Este guia fornece instruções para configurar e executar o projeto **Pedidos-app** utilizando contêineres Docker. 
 
