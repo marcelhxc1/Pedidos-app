@@ -41,11 +41,10 @@ Route::middleware(['auth.jwt'])->group(function () {
         Route::patch('/{id}/status', [OrderController::class, 'updateStatus'])->middleware('admin');
     });
 
-
     Route::prefix('users')->group(function () {
-        Route::get('/', [UserController::class, 'index']);
+        Route::get('/', [UserController::class, 'index'])->middleware('admin');
         Route::post('/', [UserController::class, 'store'])->middleware('admin');
-        Route::get('{id}', [UserController::class, 'show']);
+        Route::get('{id}', [UserController::class, 'show'])->middleware('admin');
         Route::put('{id}', [UserController::class, 'update'])->middleware('admin');
         Route::delete('{id}', [UserController::class, 'destroy'])->middleware('admin');
     });

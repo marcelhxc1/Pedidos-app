@@ -43,7 +43,84 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Login- Erro de credenciais",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "teste@teste.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "pass@124323",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "localhost/api/login",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"login"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"error\": \"Unauthorized\"\r\n}"
+						},
+						{
+							"name": "Login - Sucesso",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "teste@teste.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "pass@1243",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "localhost/api/login",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"message\": \"Código MFA enviado para seu e-mail. Por favor, verifique para concluir o login.\"\r\n}"
+						}
+					]
 				},
 				{
 					"name": "Verify-Mfa-Token",
@@ -79,7 +156,83 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Verify-Mfa-Token - Erro de token",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "teste@teste.com",
+											"type": "text"
+										},
+										{
+											"key": "mfa",
+											"value": "341747",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "localhost/api/verify-mfa",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"verify-mfa"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"message\": \"Código MFA inválido ou expirado.\"\r\n}\r\n"
+						},
+						{
+							"name": "Verify-Mfa-Token - Sucesso",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "teste@teste.com",
+											"type": "text"
+										},
+										{
+											"key": "mfa",
+											"value": "341747",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "localhost/api/verify-mfa",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"verify-mfa"
+									]
+								}
+							},
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"message\": \"Autenticação MFA bem-sucedida.\",\r\n    \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2FwaS92ZXJpZnktbWZhIiwiaWF0IjoxNzM2NzE0NTEyLCJleHAiOjE3MzY3MTgxMTIsIm5iZiI6MTczNjcxNDUxMiwianRpIjoiemdIMDZpRDV4UlBEN3lJcCIsInN1YiI6IjkiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.NDTjYHtzp5plrDgZQldgA8wHV3tNg94K8iI0wn2oXao\"\r\n}"
+						}
+					]
 				}
 			]
 		},
@@ -121,7 +274,104 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "CreateUser - Erro de permissão",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Nome do Usuário3\",\r\n    \"email\": \"usuario3@example.com\",\r\n    \"password\": \"senha1234\",\r\n    \"password_confirmation\": \"senha1234\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost/api/users",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"users"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"message\": \"Você não tem permissão para acessar este recurso.\"\r\n}"
+						},
+						{
+							"name": "CreateUser - Erro de autenticação",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Nome do Usuário3\",\r\n    \"email\": \"usuario3@example.com\",\r\n    \"password\": \"senha1234\",\r\n    \"password_confirmation\": \"senha1234\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost/api/users",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"users"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "CreateUser - Sucesso",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Nome do Usuário3\",\r\n    \"email\": \"usuario3@example.com\",\r\n    \"password\": \"senha1234\",\r\n    \"password_confirmation\": \"senha1234\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost/api/users",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"users"
+									]
+								}
+							},
+							"status": "Accepted",
+							"code": 202,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"message\": \"Usuário sendo criado...\"\r\n}"
+						}
+					]
 				},
 				{
 					"name": "GetAllUsers",
@@ -149,7 +399,54 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "GetAllUsers - Erro de autenticação",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost/api/users",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"users"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "GetAllUsers - Sucesso",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost/api/users",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"users"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "[\r\n    {\r\n        \"id\": 321,\r\n        \"name\": \"Lacey Mann\",\r\n        \"email\": \"test4@example.com\",\r\n        \"email_verified_at\": \"2025-01-11T21:43:46.000000Z\",\r\n        \"created_at\": \"2025-01-11T21:43:47.000000Z\",\r\n        \"updated_at\": \"2025-01-11T21:43:48.000000Z\",\r\n        \"roles\": \"user\"\r\n    },\r\n]"
+						}
+					]
 				},
 				{
 					"name": "UpdateUser",
@@ -187,7 +484,105 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "UpdateUser - Sucesso",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Novo Nome\",\r\n  \"email\": \"novoemail@dominio.com\",\r\n  \"password\": \"senha12345\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost/api/users/2",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"users",
+										"2"
+									]
+								}
+							},
+							"status": "Accepted",
+							"code": 202,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"message\": \"Atualização em andamento.\"\r\n}"
+						},
+						{
+							"name": "UpdateUser - Erro de autenticação",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Novo Nome\",\r\n  \"email\": \"novoemail@dominio.com\",\r\n  \"password\": \"senha12345\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost/api/users/2",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"users",
+										"2"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "UpdateUser - Erro de permissão",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Novo Nome\",\r\n  \"email\": \"novoemail@dominio.com\",\r\n  \"password\": \"senha12345\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost/api/users/2",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"users",
+										"2"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"message\": \"Você não tem permissão para acessar este recurso.\"\r\n}"
+						}
+					]
 				},
 				{
 					"name": "DeleteUsers",
@@ -216,7 +611,80 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "DeleteUsers - Sucesso",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost/api/users/2",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"users",
+										"2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"message\": \"Usuário deletado com sucesso!\"\r\n}"
+						},
+						{
+							"name": "DeleteUsers - Erro de autenticação",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost/api/users/2",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"users",
+										"2"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "DeleteUsers - Erro de permissão",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost/api/users/2",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"users",
+										"2"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"message\": \"Você não tem permissão para acessar este recurso.\"\r\n}"
+						}
+					]
 				}
 			]
 		},
@@ -258,7 +726,72 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "CreateOrder - Sucesso",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"user_id\": 1,\r\n  \"products\": [\r\n    {\r\n      \"id\": 1,\r\n      \"quantity\": 2\r\n    },\r\n    {\r\n      \"id\": 2,\r\n      \"quantity\": 5\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost/api/orders",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"orders"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"message\": \"Pedido recebido e sendo processado.\"\r\n}"
+						},
+						{
+							"name": "CreateOrder - Erro de autenticação",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"user_id\": 1,\r\n  \"products\": [\r\n    {\r\n      \"id\": 1,\r\n      \"quantity\": 2\r\n    },\r\n    {\r\n      \"id\": 2,\r\n      \"quantity\": 5\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost/api/orders",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"orders"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
 				},
 				{
 					"name": "GetAllOrders",
@@ -286,7 +819,54 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "GetAllOrders - Sucesso",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost/api/orders",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"orders"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "[\r\n    {\r\n        \"id\": 1,\r\n        \"user_id\": 1,\r\n        \"total_value\": \"349.95\",\r\n        \"status\": \"pending\",\r\n        \"order_data\": null,\r\n        \"created_at\": \"2025-01-11T16:49:08.000000Z\",\r\n        \"updated_at\": \"2025-01-11T16:49:08.000000Z\",\r\n        \"deleted_at\": null,\r\n        \"products\": []\r\n    },\r\n    {\r\n        \"id\": 2,\r\n        \"user_id\": 1,\r\n        \"total_value\": \"349.95\",\r\n        \"status\": \"pending\",\r\n        \"order_data\": null,\r\n        \"created_at\": \"2025-01-11T16:51:48.000000Z\",\r\n        \"updated_at\": \"2025-01-11T16:51:48.000000Z\",\r\n        \"deleted_at\": null,\r\n        \"products\": []\r\n    },\r\n    {\r\n        \"id\": 3,\r\n        \"user_id\": 1,\r\n        \"total_value\": \"349.95\",\r\n        \"status\": \"pending\",\r\n        \"order_data\": \"[{\\\"id\\\": 1, \\\"quantity\\\": 2}, {\\\"id\\\": 2, \\\"quantity\\\": 3}]\",\r\n        \"created_at\": \"2025-01-11T16:56:54.000000Z\",\r\n        \"updated_at\": \"2025-01-11T16:56:54.000000Z\",\r\n        \"deleted_at\": null,\r\n        \"products\": []\r\n    },\r\n    {\r\n        \"id\": 4,\r\n        \"user_id\": 1,\r\n        \"total_value\": \"449.93\",\r\n        \"status\": \"pending\",\r\n        \"order_data\": \"[{\\\"id\\\": 1, \\\"quantity\\\": 2}, {\\\"id\\\": 2, \\\"quantity\\\": 5}]\",\r\n        \"created_at\": \"2025-01-11T17:00:34.000000Z\",\r\n        \"updated_at\": \"2025-01-11T17:00:34.000000Z\",\r\n        \"deleted_at\": null,\r\n        \"products\": []\r\n    },\r\n    {\r\n        \"id\": 5,\r\n        \"user_id\": 1,\r\n        \"total_value\": \"449.93\",\r\n        \"status\": \"pending\",\r\n        \"order_data\": \"[{\\\"id\\\": 1, \\\"quantity\\\": 2}, {\\\"id\\\": 2, \\\"quantity\\\": 5}]\",\r\n        \"created_at\": \"2025-01-11T17:04:26.000000Z\",\r\n        \"updated_at\": \"2025-01-11T17:04:26.000000Z\",\r\n        \"deleted_at\": null,\r\n        \"products\": [\r\n            {\r\n                \"id\": 1,\r\n                \"name\": \"Produto 1\",\r\n                \"unit_price\": \"99.99\",\r\n                \"description\": \"Descrição do Produto 1\",\r\n                \"created_at\": \"2025-01-11T16:32:32.000000Z\",\r\n                \"updated_at\": \"2025-01-11T16:32:32.000000Z\",\r\n                \"deleted_at\": null,\r\n                \"available_quantity\": 100,\r\n                \"pivot\": {\r\n                    \"order_id\": 5,\r\n                    \"product_id\": 1,\r\n                    \"quantity\": 2,\r\n                    \"subtotal\": \"199.98\"\r\n                }\r\n            },\r\n            {\r\n                \"id\": 2,\r\n                \"name\": \"Produto 2\",\r\n                \"unit_price\": \"49.99\",\r\n                \"description\": \"Descrição do Produto 2\",\r\n                \"created_at\": \"2025-01-11T16:32:32.000000Z\",\r\n                \"updated_at\": \"2025-01-11T16:32:32.000000Z\",\r\n                \"deleted_at\": null,\r\n                \"available_quantity\": 100,\r\n                \"pivot\": {\r\n                    \"order_id\": 5,\r\n                    \"product_id\": 2,\r\n                    \"quantity\": 5,\r\n                    \"subtotal\": \"249.95\"\r\n                }\r\n            }\r\n        ]\r\n    }\r\n]"
+						},
+						{
+							"name": "GetAllOrders - Erro de autenticação",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost/api/orders",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"orders"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
 				},
 				{
 					"name": "UpdateOrderStatus",
@@ -325,7 +905,76 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "UpdateOrderStatus - Sucesso",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"status\": \"completed\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost/api/orders/1/status",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"orders",
+										"1",
+										"status"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"message\": \"Status atualizado e e-mail enviado com sucesso.\",\r\n    \"order\": {\r\n        \"id\": 1,\r\n        \"user_id\": 1,\r\n        \"total_value\": \"349.95\",\r\n        \"status\": \"processing\",\r\n        \"order_data\": null,\r\n        \"created_at\": \"2025-01-11T16:49:08.000000Z\",\r\n        \"updated_at\": \"2025-01-11T17:22:38.000000Z\",\r\n        \"deleted_at\": null\r\n    }\r\n}"
+						},
+						{
+							"name": "UpdateOrderStatus - Erro de autenticação",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"status\": \"completed\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost/api/orders/1/status",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"orders",
+										"1",
+										"status"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
 				}
 			]
 		},
@@ -358,7 +1007,54 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "GetAllProducts - Sucesso",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost/api/products",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"products"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "[\r\n    {\r\n        \"id\": 1,\r\n        \"name\": \"Produto 1\",\r\n        \"unit_price\": \"99.99\",\r\n        \"description\": \"Descrição do Produto 1\",\r\n        \"SKU\": \"default_sku\",\r\n        \"created_at\": \"2025-01-11T16:32:32.000000Z\",\r\n        \"updated_at\": \"2025-01-11T18:51:06.000000Z\",\r\n        \"deleted_at\": null,\r\n        \"available_quantity\": 90\r\n    },\r\n    {\r\n        \"id\": 3,\r\n        \"name\": \"Produto 3\",\r\n        \"unit_price\": \"79.99\",\r\n        \"description\": \"Descrição do Produto 3\",\r\n        \"SKU\": \"default_sku\",\r\n        \"created_at\": \"2025-01-11T16:32:32.000000Z\",\r\n        \"updated_at\": \"2025-01-11T16:32:32.000000Z\",\r\n        \"deleted_at\": null,\r\n        \"available_quantity\": 100\r\n    },\r\n    {\r\n        \"id\": 4,\r\n        \"name\": \"Produto 11\",\r\n        \"unit_price\": \"10.50\",\r\n        \"description\": \"Descrição do Produto 3232\",\r\n        \"SKU\": \"default_sku\",\r\n        \"created_at\": \"2025-01-11T18:27:09.000000Z\",\r\n        \"updated_at\": \"2025-01-11T18:27:09.000000Z\",\r\n        \"deleted_at\": null,\r\n        \"available_quantity\": 0\r\n    },\r\n    {\r\n        \"id\": 5,\r\n        \"name\": \"Produto 22\",\r\n        \"unit_price\": \"20.00\",\r\n        \"description\": \"Descrição do Produto 2333\",\r\n        \"SKU\": \"default_sku\",\r\n        \"created_at\": \"2025-01-11T18:27:09.000000Z\",\r\n        \"updated_at\": \"2025-01-11T18:27:09.000000Z\",\r\n        \"deleted_at\": null,\r\n        \"available_quantity\": 0\r\n    },\r\n    {\r\n        \"id\": 6,\r\n        \"name\": \"Produto 11\",\r\n        \"unit_price\": \"10.50\",\r\n        \"description\": \"Descrição do Produto 3232\",\r\n        \"SKU\": \"default_sku\",\r\n        \"created_at\": \"2025-01-11T18:29:00.000000Z\",\r\n        \"updated_at\": \"2025-01-11T18:29:00.000000Z\",\r\n        \"deleted_at\": null,\r\n        \"available_quantity\": 0\r\n    },\r\n    {\r\n        \"id\": 7,\r\n        \"name\": \"Produto 22\",\r\n        \"unit_price\": \"20.00\",\r\n        \"description\": \"Descrição do Produto 2333\",\r\n        \"SKU\": \"default_sku\",\r\n        \"created_at\": \"2025-01-11T18:29:00.000000Z\",\r\n        \"updated_at\": \"2025-01-11T18:29:00.000000Z\",\r\n        \"deleted_at\": null,\r\n        \"available_quantity\": 0\r\n    },\r\n    {\r\n        \"id\": 8,\r\n        \"name\": \"Produto 11\",\r\n        \"unit_price\": \"10.50\",\r\n        \"description\": \"Descrição do Produto 3232\",\r\n        \"SKU\": \"default_sku\",\r\n        \"created_at\": \"2025-01-11T18:31:03.000000Z\",\r\n        \"updated_at\": \"2025-01-11T18:31:03.000000Z\",\r\n        \"deleted_at\": null,\r\n        \"available_quantity\": 100\r\n    },\r\n    {\r\n        \"id\": 9,\r\n        \"name\": \"Produto 22\",\r\n        \"unit_price\": \"20.00\",\r\n        \"description\": \"Descrição do Produto 2333\",\r\n        \"SKU\": \"default_sku\",\r\n        \"created_at\": \"2025-01-11T18:31:03.000000Z\",\r\n        \"updated_at\": \"2025-01-11T18:31:03.000000Z\",\r\n        \"deleted_at\": null,\r\n        \"available_quantity\": 100\r\n    },\r\n    {\r\n        \"id\": 10,\r\n        \"name\": \"Produto 11\",\r\n        \"unit_price\": \"10.50\",\r\n        \"description\": \"Descrição do Produto 3232\",\r\n        \"SKU\": \"sku112003d\",\r\n        \"created_at\": \"2025-01-11T18:37:06.000000Z\",\r\n        \"updated_at\": \"2025-01-11T18:37:06.000000Z\",\r\n        \"deleted_at\": null,\r\n        \"available_quantity\": 100\r\n    },\r\n    {\r\n        \"id\": 11,\r\n        \"name\": \"Produto 22\",\r\n        \"unit_price\": \"20.00\",\r\n        \"description\": \"Descrição do Produto 2333\",\r\n        \"SKU\": \"sku242003d\",\r\n        \"created_at\": \"2025-01-11T18:37:06.000000Z\",\r\n        \"updated_at\": \"2025-01-11T18:37:06.000000Z\",\r\n        \"deleted_at\": null,\r\n        \"available_quantity\": 100\r\n    }\r\n]"
+						},
+						{
+							"name": "GetAllProducts - Erro de autenticação",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost/api/products",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"products"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
 				},
 				{
 					"name": "GetProductsById",
@@ -387,7 +1083,56 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "GetProductsById - Sucesso",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost/api/products/2",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"products",
+										"2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"id\": 3,\r\n    \"name\": \"Produto 3\",\r\n    \"unit_price\": \"79.99\",\r\n    \"description\": \"Descrição do Produto 3\",\r\n    \"SKU\": \"default_sku\",\r\n    \"created_at\": \"2025-01-11T16:32:32.000000Z\",\r\n    \"updated_at\": \"2025-01-11T16:32:32.000000Z\",\r\n    \"deleted_at\": null,\r\n    \"available_quantity\": 100\r\n}"
+						},
+						{
+							"name": "GetProductsById - Erro de autenticação",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost/api/products/2",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"products",
+										"2"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
 				},
 				{
 					"name": "CreateProducts",
@@ -424,7 +1169,104 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "CreateProducts - Sucesso",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"products\": [\r\n        {\r\n            \"product_name\": \"Produto 11\",\r\n            \"unit_value\": 10.50,\r\n            \"product_description\": \"Descrição do Produto 3232\",\r\n            \"avaliable_quantity\": 100,\r\n            \"SKU\": \"sku112003d\"\r\n        },\r\n        {\r\n            \"product_name\": \"Produto 22\",\r\n            \"unit_value\": 20.00,\r\n            \"product_description\": \"Descrição do Produto 2333\",\r\n            \"avaliable_quantity\": 100,\r\n            \"SKU\": \"sku242003d\"\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost/api/products",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"products"
+									]
+								}
+							},
+							"status": "Accepted",
+							"code": 202,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"message\": \"Lote de produtos em processamento.\"\r\n}"
+						},
+						{
+							"name": "CreateProducts - Erro de autenticação",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"products\": [\r\n        {\r\n            \"product_name\": \"Produto 11\",\r\n            \"unit_value\": 10.50,\r\n            \"product_description\": \"Descrição do Produto 3232\",\r\n            \"avaliable_quantity\": 100,\r\n            \"SKU\": \"sku112003d\"\r\n        },\r\n        {\r\n            \"product_name\": \"Produto 22\",\r\n            \"unit_value\": 20.00,\r\n            \"product_description\": \"Descrição do Produto 2333\",\r\n            \"avaliable_quantity\": 100,\r\n            \"SKU\": \"sku242003d\"\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost/api/products",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"products"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "CreateProducts - Erro de permissão",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"products\": [\r\n        {\r\n            \"product_name\": \"Produto 11\",\r\n            \"unit_value\": 10.50,\r\n            \"product_description\": \"Descrição do Produto 3232\",\r\n            \"avaliable_quantity\": 100,\r\n            \"SKU\": \"sku112003d\"\r\n        },\r\n        {\r\n            \"product_name\": \"Produto 22\",\r\n            \"unit_value\": 20.00,\r\n            \"product_description\": \"Descrição do Produto 2333\",\r\n            \"avaliable_quantity\": 100,\r\n            \"SKU\": \"sku242003d\"\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost/api/products",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"products"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"message\": \"Você não tem permissão para acessar este recurso.\"\r\n}"
+						}
+					]
 				},
 				{
 					"name": "DeleteProduct",
@@ -453,7 +1295,80 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "DeleteProduct - Sucesso",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost/api/products/3",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"products",
+										"3"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"message\": \"Product deleted\"\r\n}"
+						},
+						{
+							"name": "DeleteProduct - Erro de autenticação",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost/api/products/3",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"products",
+										"3"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "DeleteProduct - Erro de permissão",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost/api/products/3",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"products",
+										"3"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"message\": \"Você não tem permissão para acessar este recurso.\"\r\n}"
+						}
+					]
 				},
 				{
 					"name": "UpdateProducts",
@@ -490,7 +1405,104 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "UpdateProducts - Sucesso",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"products\": [\r\n        {\r\n            \"product_id\": 1,\r\n            \"product_name\": \"Produto 100\",\r\n            \"unit_value\": 100.0,\r\n            \"product_description\": \"Descrição do Produto 100\",\r\n            \"available_quantity\": 90\r\n        },\r\n        {\r\n            \"product_id\": 2,\r\n            \"product_name\": \"Produto 200\",\r\n            \"unit_value\": 150.0,\r\n            \"product_description\": \"Descrição do Produto 2\",\r\n            \"available_quantity\": 55\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost/api/products",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"products"
+									]
+								}
+							},
+							"status": "Accepted",
+							"code": 202,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"message\": \"Atualizações em andamento.\"\r\n}"
+						},
+						{
+							"name": "UpdateProducts - Erro de autenticação",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"products\": [\r\n        {\r\n            \"product_id\": 1,\r\n            \"product_name\": \"Produto 100\",\r\n            \"unit_value\": 100.0,\r\n            \"product_description\": \"Descrição do Produto 100\",\r\n            \"available_quantity\": 90\r\n        },\r\n        {\r\n            \"product_id\": 2,\r\n            \"product_name\": \"Produto 200\",\r\n            \"unit_value\": 150.0,\r\n            \"product_description\": \"Descrição do Produto 2\",\r\n            \"available_quantity\": 55\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost/api/products",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"products"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "UpdateProducts - Erro de permissão",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"products\": [\r\n        {\r\n            \"product_id\": 1,\r\n            \"product_name\": \"Produto 100\",\r\n            \"unit_value\": 100.0,\r\n            \"product_description\": \"Descrição do Produto 100\",\r\n            \"available_quantity\": 90\r\n        },\r\n        {\r\n            \"product_id\": 2,\r\n            \"product_name\": \"Produto 200\",\r\n            \"unit_value\": 150.0,\r\n            \"product_description\": \"Descrição do Produto 2\",\r\n            \"available_quantity\": 55\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost/api/products",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"products"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"message\": \"Você não tem permissão para acessar este recurso.\"\r\n}"
+						}
+					]
 				}
 			]
 		}
