@@ -190,4 +190,14 @@ sudo supervisorctl start laravel-queue
 
 - A collection completa do postman está nos junto a pasta raiz do projeto, faça o download do aplicativo, importe a collection e estará pronto para uso.
 
+## Stress test ##
+
+Para estressar a aplicação e validar o consumo de recursos das maquinas foi criado o arquivo generate_requests.sh, este arquivo dispara 10000 requisições em 1 segundo e tem por objetivo estressar a aplicação e facilitar a analise via NewRelic de picos de uso da plataforma.
+
+Para executar o arquivo siga o comando abaixo :
+
+```bash
+./generate_requests.sh
+```
+
 Após seguir essas etapas, o projeto estará configurado e em execução.
